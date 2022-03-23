@@ -1,0 +1,55 @@
+<div class="main-container">
+    <h1 class="text-center">Jogo da velha <span class="accent">Marvel</span></h1>
+    <div class="field">
+        <p class="current-status text-center">Inicie o jogo clicando no botão abaixo.</p>
+    </div>
+
+    <div *ngIf="this.game.gameStatus === 0" class="field">
+        <div *ngIf="this.game.playAgain === false">
+            <div class="input-field">
+                <p class="validator"></p>
+                <label for="characterPlayerOne">Insira o nome do personagem Marvel 1</label>
+                <br>
+                <input autocomplete="off" (keyup)="EmptyValidate(characterPlayerOne.value, 0)" class="input" id="characterPlayerOne" #characterPlayerOne type="text" placeholder="Jogador 1">
+                <div class="underline"></div>
+                <br>
+            </div>
+            <br>
+
+            <div class="input-field">
+                <p class="validator"></p>
+                <label for="characterPlayerTwo">Insira o nome do personagem Marvel 2</label>
+                <br>
+                <input autocomplete="off" (keyup)="EmptyValidate(characterPlayerTwo.value, 1)" class="input" id="characterPlayerTwo" #characterPlayerTwo type="text" placeholder="Jogador 2">
+                <div class="underline"></div>
+                <br>
+            </div>
+            <br>
+            <button [disabled]="characterPlayerOne.value === '' || characterPlayerTwo.value === ''" (click)="getCharacterByName(characterPlayerOne.value, characterPlayerTwo.value);" class="start-game-button">Iniciar jogo</button>
+        </div>
+        <button *ngIf="this.game.playAgain === true" (click)="startGame();" class="start-game-button">Jogar novamente</button>
+    </div>
+
+    
+    <div *ngIf="this.game.gameStatus === 1" class="container gameboard">
+        <div class="my-auto mx-auto text-center"><img src="{{thumbnailPlayerOne}}" alt="Personagem marvel {{namePlayerOne}}"><p>{{namePlayerOne}} - <span>{{game.scorePlayerOne}}</span></p></div>
+        <div class="gamefield mx-auto">
+            <div class="row">
+                <div id="one" (click)="clickSubfield($event)" i="0" j="0" class="subfield up left col-4"></div>
+                <div id="two" (click)="clickSubfield($event)" i="0" j="1" class="subfield up col-4"></div>
+                <div id="three" (click)="clickSubfield($event)" i="0" j="2" class="subfield up right col-4"></div>
+            </div>
+            <div class="row">
+                <div id="four" (click)="clickSubfield($event)" i="1" j="0" class="subfield left col-4"></div>
+                <div id="five" (click)="clickSubfield($event)" i="1" j="1" class="subfield col-4"></div>
+                <div id="six" (click)="clickSubfield($event)" i="1" j="2" class="subfield right col-4"></div>
+            </div>
+            <div class="row">
+                <div id="seven" (click)="clickSubfield($event)" i="2" j="0" class="subfield bottom left col-4"></div>
+                <div id="eight" (click)="clickSubfield($event)" i="2" j="1" class="subfield bottom col-4"></div>
+                <div id="nine" (click)="clickSubfield($event)" i="2" j="2" class="subfield bottom right col-4"></div>
+            </div>
+        </div>
+        <div class="my-auto mx-auto text-center"><span><img src="{{thumbnailPlayerTwo}}" alt="Personagem Marvel {{namePlayerTwo}}"></span><p>{{namePlayerTwo}} - <span>{{game.scorePlayerTwo}}</span></p></div>
+    </div>
+</div>

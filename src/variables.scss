@@ -1,0 +1,8 @@
+$text-color: 000;
+$text-button: #fff;
+$primary-color: #E62429;
+$secondary-color: #AA0400;
+
+@mixin background-gradient($direction, $color, $colorTwo) {
+    background: linear-gradient($direction, $color, $colorTwo);
+}
